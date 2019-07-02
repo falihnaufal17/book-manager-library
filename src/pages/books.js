@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import * as bootstrap from 'react-bootstrap';
+import ModalDialog from '../components/modal';
 
 class Books extends Component {
+    constructor(...args) {
+        super(...args);
 
+        this.state = { modalShow: false };
+    }
     render() {
+        let modalClose = () => this.setState({ modalShow: false });
         const searchBar = {
             position: 'absolute',
-            width: '65%',
-            height: '30px',
+            width: '70%',
+            height: '60px',
             left: '200px',
             top: '140px',
             padding: '14px 40px',
+            fontSize: '18px',
 
             border: 'none',
             background: '#FFFFFF',
@@ -49,7 +55,7 @@ class Books extends Component {
 
         const card = {
             width: '180px',
-            height: '300px',
+            height: '280px',
             marginTop: '340px',
             marginLeft: '100px',
 
@@ -76,31 +82,36 @@ class Books extends Component {
                     </div>
                 </form>
 
-                <button style={btnAdd}>ADD</button>
+                <button style={btnAdd} onClick={() => this.setState({ modalShow: true })}>ADD</button>
+
+                <ModalDialog
+                    show={this.state.modalShow}
+                    onHide={modalClose} />
+
 
                 <div style={flexContainer}>
                     <div style={card}>
-                        <img src={require('../assets/img/mission-impossible.jpg')} style={cardImage} />
+                        <img src={require('../assets/img/mission-impossible.jpg')} style={cardImage} alt="" />
                         <div style={cardContainer}>
-                            <h2>Mission Impossible</h2>
+                            <h5>Mission Impossible</h5>
                         </div>
                     </div>
                     <div style={card}>
-                        <img src={require('../assets/img/assassins-creed-3.jpg')} style={cardImage} />
+                        <img src={require('../assets/img/assassins-creed-3.jpg')} style={cardImage} alt="" />
                         <div style={cardContainer}>
-                            <h2>Assassins Creed 3: ....</h2>
+                            <h5>Assassins Creed 3: Forsaken</h5>
                         </div>
                     </div>
                     <div style={card}>
-                        <img src={require('../assets/img/assassins-creed-2.jpg')} style={cardImage} />
+                        <img src={require('../assets/img/assassins-creed-2.jpg')} style={cardImage} alt="" />
                         <div style={cardContainer}>
-                            <h2>Assassins Creed 2</h2>
+                            <h5>Assassins Creed 2: Brotherhood</h5>
                         </div>
                     </div>
                     <div style={card}>
-                        <img src={require('../assets/img/matematika-dan-sains.jpg')} style={cardImage} />
+                        <img src={require('../assets/img/matematika-dan-sains.jpg')} style={cardImage} alt="" />
                         <div style={cardContainer}>
-                            <h2>Matematika dan Sains</h2>
+                            <h5>Matematika dan Sains</h5>
                         </div>
                     </div>
                 </div>

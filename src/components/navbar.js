@@ -16,7 +16,6 @@ class Navbar extends Component {
         const title = {
             position: 'absolute',
             left: '86px',
-            bottom: -30,
 
             fontFamily: 'Open Sans',
             fontStyle: 'normal',
@@ -28,7 +27,7 @@ class Navbar extends Component {
         }
         return (
             <div style={titleBar} >
-                <h1 style={title}>BOOKS</h1>
+                <h6 style={title}>BOOKS</h6>
             </div>
         );
     }
