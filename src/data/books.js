@@ -27,7 +27,7 @@ const book = [
         "writer": "Oliver Bowden",
         "location": "F1 Shelf 1",
         "category": "Action",
-        "img": "https://assassinscreed.fandom.com/wiki/Assassin%27s_Creed:_Brotherhood_(novel)?file=Assassin%27sCreedBrotherhoodnovel.jpg",
+        "img": "https://vignette.wikia.nocookie.net/assassinscreed/images/5/56/Assassin%27sCreedBrotherhoodnovel.jpg/revision/latest?cb=20101021155233",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac diam eget est rutrum ultrices. Donec laoreet enim a massa dapibus, cursus egestas dui pulvinar. Proin sit amet accumsan lectus. Nullam auctor auctor consequat.",
         "created_at": "2019-06-25T02:47:49.000Z",
         "updated_at": "2019-06-25T02:47:49.000Z"
@@ -44,3 +44,5 @@ const book = [
         "updated_at": "2019-06-25T02:47:49.000Z"
     },
 ]
+
+export default book;
