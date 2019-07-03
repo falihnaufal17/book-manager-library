@@ -35,7 +35,8 @@ class ModalDialog extends Component {
                                 <Form.Control as="textarea" rows="3" placeholder="Description..." />
                             </Col>
                         </Form.Group>
-                        <Button style={{ backgroundColor: '#F4CF5D', float: 'right' }} type="submit">
+                        <Button style={{ backgroundColor: '#F4CF5D', float: 'right', border: 'none', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)', width: '90px',
+            height: '40px',}} type="submit">
                             Save
                         </Button>
                     </Form>

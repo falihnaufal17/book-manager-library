@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Navbar from '../components/navbar';
 import ModalDialog from '../components/modal';
+import { Link } from 'react-router-dom';
 
 class Books extends Component {
     constructor(...args) {
@@ -51,12 +53,13 @@ class Books extends Component {
             display: 'flex',
             flexWrap: 'wrap',
             marginLeft: '90px',
+            marginTop: '340px'
         }
 
         const card = {
             width: '180px',
             height: '280px',
-            marginTop: '340px',
+            marginTop: '20px',
             marginLeft: '100px',
 
             background: '#FFFFFF',
@@ -66,6 +69,7 @@ class Books extends Component {
 
         const cardContainer = {
             padding: '2px 16px',
+            color: 'black',
         }
 
         const cardImage = {
@@ -75,7 +79,9 @@ class Books extends Component {
         }
 
         return (
+
             <div style={container}>
+                <Navbar></Navbar>
                 <form>
                     <div>
                         <input type="text" style={searchBar} placeholder="Search Book..." />
@@ -90,12 +96,14 @@ class Books extends Component {
 
 
                 <div style={flexContainer}>
-                    <div style={card}>
-                        <img src={require('../assets/img/mission-impossible.jpg')} style={cardImage} alt="" />
-                        <div style={cardContainer}>
-                            <h5>Mission Impossible</h5>
+                    <Link to={'/bookdetail'}>
+                        <div style={card}>
+                            <img src={require('../assets/img/mission-impossible.jpg')} style={cardImage} alt="" />
+                            <div style={cardContainer}>
+                                <h5>Mission Impossible</h5>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                     <div style={card}>
                         <img src={require('../assets/img/assassins-creed-3.jpg')} style={cardImage} alt="" />
                         <div style={cardContainer}>
