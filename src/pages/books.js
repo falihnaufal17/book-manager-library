@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../components/navbar';
-import ModalDialog from '../components/modal';
+import ModalForm from '../components/modal';
 import { Link } from 'react-router-dom';
 
 class Books extends Component {
@@ -90,7 +90,7 @@ class Books extends Component {
 
                 <button style={btnAdd} onClick={() => this.setState({ modalShow: true })}>ADD</button>
 
-                <ModalDialog
+                <ModalForm
                     show={this.state.modalShow}
                     onHide={modalClose} />
 
