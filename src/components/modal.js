@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
 import { Modal, Form, Button, Col, Row } from 'react-bootstrap';
 import Book from '../pages/books';
+import book from '../data/books';
 
 export default class ModalForm extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            book: [],
-            urlImg: '',
-            title: '',
+            book: book,
+            img: '',
+            name: '',
             description: '',
+            created_at: new Date(),
+            updated_at: new Date()
         }
     }
     render() {
         const addBook = () => {
             this.state.book.push({
-                'title': this.state.title,
-                'img': this.state.urlImg,
-                'description': this.state.description
+                'name': this.state.name,
+                'img': this.state.img,
+                'description': this.state.description,
+                'created_at': this.state.created_at,
+                'updated_at': this.state.updated_at
             });
 
             console.log(this.state.book);
@@ -39,14 +44,14 @@ export default class ModalForm extends Component {
                         <Form.Group as={Row} controlId="formUrlImage">
                             <Form.Label column sm="2">Url Image</Form.Label>
                             <Col sm="10">
-                                <Form.Control placeholder="Url Image..." onChange={(e) => this.setState({ urlImg: e.target.value })} />
+                                <Form.Control placeholder="Url Image..." onChange={(e) => this.setState({ img: e.target.value })} />
                             </Col>
                         </Form.Group>
 
                         <Form.Group controlId="formTitle" as={Row}>
                             <Form.Label column sm="2">Title</Form.Label>
                             <Col sm="10">
-                                <Form.Control placeholder="Title..." onChange={(e) => this.setState({ title: e.target.value })} />
+                                <Form.Control placeholder="Title..." onChange={(e) => this.setState({ name: e.target.value })} />
                             </Col>
                         </Form.Group>
                         <Form.Group controlId="formDescription" as={Row}>
