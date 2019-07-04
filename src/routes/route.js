@@ -8,7 +8,7 @@ class Routing extends Component {
         return (
             <Router>
                 <Route exact path='/' component={Books} />
-                <Route exact path='/bookdetail' component={BookDetail} />
+                <Route exact path='/bookdetail/:bookid' component={BookDetail} />
             </Router>
         )
     }

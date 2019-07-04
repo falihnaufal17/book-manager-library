@@ -3,13 +3,18 @@ import Navbar from '../components/navbar';
 import ModalForm from '../components/modal';
 import { Link } from 'react-router-dom';
 
+import dataBook from '../data/books';
 class Books extends Component {
-    constructor(...args) {
-        super(...args);
+    constructor(props) {
+        super(props);
 
-        this.state = { modalShow: false };
+        this.state = {
+            modalShow: false,
+            books: dataBook
+        };
     }
     render() {
+        let data = this.state.books;
         let modalClose = () => this.setState({ modalShow: false });
         const searchBar = {
             position: 'absolute',
@@ -96,32 +101,18 @@ class Books extends Component {
 
 
                 <div style={flexContainer}>
-                    <Link to={'/bookdetail'}>
-                        <div style={card}>
-                            <img src={require('../assets/img/mission-impossible.jpg')} style={cardImage} alt="" />
-                            <div style={cardContainer}>
-                                <h5>Mission Impossible</h5>
-                            </div>
-                        </div>
-                    </Link>
-                    <div style={card}>
-                        <img src={require('../assets/img/assassins-creed-3.jpg')} style={cardImage} alt="" />
-                        <div style={cardContainer}>
-                            <h5>Assassins Creed 3: Forsaken</h5>
-                        </div>
-                    </div>
-                    <div style={card}>
-                        <img src={require('../assets/img/assassins-creed-2.jpg')} style={cardImage} alt="" />
-                        <div style={cardContainer}>
-                            <h5>Assassins Creed 2: Brotherhood</h5>
-                        </div>
-                    </div>
-                    <div style={card}>
-                        <img src={require('../assets/img/matematika-dan-sains.jpg')} style={cardImage} alt="" />
-                        <div style={cardContainer}>
-                            <h5>Matematika dan Sains</h5>
-                        </div>
-                    </div>
+                    {data.map((item) => {
+                        return (
+                            <Link to={`/bookdetail/${item.bookid}`}>
+                                <div style={card}>
+                                    <img src={item.img} style={cardImage} alt="" />
+                                    <div style={cardContainer}>
+                                        <h5>{item.name}</h5>
+                                    </div>
+                                </div>
+                            </Link>
+                        )
+                    })}
                 </div>
             </div>
         )

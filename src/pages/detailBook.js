@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import { Modal, Form, Col, Row, Button } from 'react-bootstrap';
 
+import dataBooks from '../data/books';
 //import image from assets
 import MI from '../assets/img/mission-impossible.jpg'
 
 class DetailBook extends Component {
-    constructor(...args) {
-        super(...args);
+    constructor(props) {
+        super(props);
 
         this.state = {
             modalDeleteShow: false,
-            modalEditShow: false
+            modalEditShow: false,
+            data: dataBooks
         };
+
+
     }
+
     render() {
         let modalClose = () => this.setState({
             modalDeleteShow: false,
             modalEditShow: false
         });
+        let bookid = Number(this.props.match.params.bookid);
+        let data = dataBooks.find((item) => item.bookid === bookid);
         const cover = {
             position: 'absolute',
             width: '100%',
@@ -25,7 +32,7 @@ class DetailBook extends Component {
             left: '0px',
             top: '0px',
 
-            backgroundImage: `url(${MI})`,
+            backgroundImage: `url(${data.img})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'
         }
@@ -37,7 +44,7 @@ class DetailBook extends Component {
             left: '1100px',
             top: '253px',
 
-            background: `url(${MI})`,
+            background: `url(${data.img})`,
             boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.25)',
             borderRadius: '15px',
             backgroundSize: 'cover'
@@ -124,26 +131,45 @@ class DetailBook extends Component {
             cursor: 'pointer',
             color: '#FFFFFF',
         }
+        function formatDate(date) {
+            let data = Date.parse(date);
+            let newDate = new Date(data);
+            let day = newDate.getDate();
+            let months = ['Jan', 'Feb', 'Mar', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            let month = months[newDate.getMonth()];
+            let year = newDate.getFullYear();
+            return `${day} ${month} ${year}`
+        }
         return (
             <div style={cover}>
-                <div style={btnEdit} onClick={() => this.setState({ modalEditShow: true })}>Edit</div>
+                <div
+                    style={btnEdit}
+                    onClick={() => this.setState({ modalEditShow: true })}
+                >Edit</div>
+
                 <ModalEdit
                     show={this.state.modalEditShow}
                     onHide={modalClose}
                 />
-                <div style={btnDelete} onClick={() => this.setState({ modalDeleteShow: true })}>Delete</div>
+
+                <div
+                    style={btnDelete}
+                    onClick={() => this.setState({ modalDeleteShow: true })}
+                >Delete</div>
+
                 <ModalDelete
                     show={this.state.modalDeleteShow}
                     onHide={modalClose}
                 />
+
                 <div style={coverMini}></div>
                 <div>
-                    <h1 style={titleBook}>Mission Impossible</h1>
-                    <p style={date}>30 Juni 2019</p>
+                    <h1 style={titleBook}>{data.name}</h1>
+                    <p style={date}>{formatDate(data.updated_at)}</p>
                 </div>
                 <div>
                     <p style={description}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac diam eget est rutrum ultrices. Donec laoreet enim a massa dapibus, cursus egestas dui pulvinar. Proin sit amet accumsan lectus. Nullam auctor auctor consequat. Donec semper magna erat, sed fringilla lacus pretium eget. Cras porttitor, nibh sit amet interdum bibendum, nibh velit accumsan tellus, vel vehicula tellus leo vitae ipsum. Praesent sit amet libero sed orci ullamcorper efficitur. Pellentesque in euismod purus, sit amet ultrices tortor. Vestibulum ante dui, tempor at dui id, tincidunt euismod diam. Integer pellentesque massa nibh, ac eleifend odio malesuada sed. Phasellus orci sem, cursus nec orci ut, accumsan facilisis lacus. Nullam at elementum nibh, ac gravida felis. In sagittis rhoncus nisi tempus dignissim. Sed fringilla consequat ante vitae lobortis. Cras posuere ligula vel enim suscipit malesuada. Vivamus non nulla ut ante imperdiet euismod quis nec massa.
+                        {data.description}
                     </p>
                 </div>
             </div>
