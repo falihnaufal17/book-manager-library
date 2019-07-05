@@ -3,7 +3,6 @@ import { Modal, Form, Col, Row, Button } from 'react-bootstrap';
 
 import dataBooks from '../data/books';
 //import image from assets
-import MI from '../assets/img/mission-impossible.jpg'
 
 class DetailBook extends Component {
     constructor(props) {
@@ -25,6 +24,11 @@ class DetailBook extends Component {
         });
         let bookid = Number(this.props.match.params.bookid);
         let data = dataBooks.find((item) => item.bookid === bookid);
+        function deleteBook() {
+            let dataIndex = dataBooks.indexOf(data)
+            dataBooks.splice(dataIndex, 1)
+        }
+
         const cover = {
             position: 'absolute',
             width: '100%',
@@ -52,7 +56,7 @@ class DetailBook extends Component {
 
         const titleBook = {
             position: 'absolute',
-            width: '585px',
+            width: '',
             height: '114px',
             left: '104px',
             top: '478px',
@@ -135,11 +139,13 @@ class DetailBook extends Component {
             let data = Date.parse(date);
             let newDate = new Date(data);
             let day = newDate.getDate();
-            let months = ['Jan', 'Feb', 'Mar', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             let month = months[newDate.getMonth()];
             let year = newDate.getFullYear();
             return `${day} ${month} ${year}`
         }
+
+
         return (
             <div style={cover}>
                 <div
@@ -150,16 +156,20 @@ class DetailBook extends Component {
                 <ModalEdit
                     show={this.state.modalEditShow}
                     onHide={modalClose}
+                    data={data}
                 />
-
                 <div
                     style={btnDelete}
-                    onClick={() => this.setState({ modalDeleteShow: true })}
+                    onClick={() => {
+                        deleteBook()
+                        // this.setState({ modalDeleteShow: true })
+                    }}
                 >Delete</div>
 
                 <ModalDelete
                     show={this.state.modalDeleteShow}
                     onHide={modalClose}
+                    data={data}
                 />
 
                 <div style={coverMini}></div>
@@ -198,7 +208,7 @@ export class ModalDelete extends Component {
 
                         color: '#000000',
 
-                    }}>Data Dilan 1990 berhasil dihapus !</p>
+                    }}>Data {this.props.data.name} berhasil dihapus !</p>
                 </Modal.Body>
             </Modal>
         )
@@ -207,6 +217,17 @@ export class ModalDelete extends Component {
 
 
 export class ModalEdit extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            book: dataBooks,
+            img: props.data.img,
+            name: props.data.name,
+            description: props.data.description,
+        }
+    }
+
     render() {
         return (
             <Modal
@@ -224,26 +245,26 @@ export class ModalEdit extends Component {
                         <Form.Group as={Row} controlId="formUrlImage">
                             <Form.Label column sm="2">Url Image</Form.Label>
                             <Col sm="10">
-                                <Form.Control placeholder="Url Image..." />
+                                <Form.Control placeholder="Url Image..." value={this.state.img} onChange={(e) => this.setState({ img: e.target.value })} />
                             </Col>
                         </Form.Group>
 
                         <Form.Group controlId="formTitle" as={Row}>
                             <Form.Label column sm="2">Title</Form.Label>
                             <Col sm="10">
-                                <Form.Control placeholder="Title..." />
+                                <Form.Control placeholder="Title..." value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
                             </Col>
                         </Form.Group>
                         <Form.Group controlId="formDescription" as={Row}>
                             <Form.Label column sm="2">Description</Form.Label>
                             <Col sm="10">
-                                <Form.Control as="textarea" rows="3" placeholder="Description..." />
+                                <Form.Control as="textarea" rows="3" placeholder="Description..." value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
                             </Col>
                         </Form.Group>
                         <Button style={{
                             backgroundColor: '#F4CF5D', float: 'right', border: 'none', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)', width: '90px',
                             height: '40px',
-                        }} type="submit">
+                        }}>
                             Save
                         </Button>
                     </Form>
