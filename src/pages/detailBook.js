@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Form, Col, Row, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom'
 
 import dataBooks from '../data/books';
 
@@ -31,7 +32,7 @@ class DetailBook extends Component {
             Swal.fire({
                 type: 'success',
                 title: 'Berhasil menghapus',
-                text:   `Data ${data.name} berhasil dihapus`
+                text: `Data ${data.name} berhasil dihapus`
             })
         }
 
@@ -164,13 +165,14 @@ class DetailBook extends Component {
                     onHide={modalClose}
                     data={data}
                 />
-                <div
-                    style={btnDelete}
-                    onClick={() => {
-                        deleteBook()
-                        // this.setState({ modalDeleteShow: true })
-                    }}
-                >Delete</div>
+                <Link to="/">
+                    <div
+                        style={btnDelete}
+                        onClick={() => {
+                            deleteBook()
+                        }}
+                    >Delete</div>
+                </Link>
 
                 {/* <ModalDelete
                     show={this.state.modalDeleteShow}
