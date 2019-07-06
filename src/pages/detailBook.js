@@ -233,7 +233,13 @@ export class ModalEdit extends Component {
             img: props.data.img,
             name: props.data.name,
             description: props.data.description,
+            updated_at: new Date()
         }
+    }
+
+    updateBook = () => {
+
+        alert('Update data successfully')
     }
 
     render() {
@@ -272,7 +278,7 @@ export class ModalEdit extends Component {
                         <Button style={{
                             backgroundColor: '#F4CF5D', float: 'right', border: 'none', boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)', width: '90px',
                             height: '40px',
-                        }}>
+                        }} onClick={this.updateBook.bind(this)}>
                             Save
                         </Button>
                     </Form>

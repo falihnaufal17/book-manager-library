@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Form, Button, Col, Row } from 'react-bootstrap';
-import Book from '../pages/books';
 import book from '../data/books';
+
+import swal from 'sweetalert2'
 
 export default class ModalForm extends Component {
     constructor(props) {
@@ -25,6 +26,12 @@ export default class ModalForm extends Component {
                 'created_at': this.state.created_at,
                 'updated_at': this.state.updated_at
             });
+
+            swal.fire({
+                type: 'success',
+                title: 'Add Book',
+                text: 'Successfully Added Book',
+            })
 
             console.log(this.state.book);
         }
