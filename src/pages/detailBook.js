@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Form, Col, Row, Button } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 import dataBooks from '../data/books';
-//import image from assets
 
 class DetailBook extends Component {
     constructor(props) {
@@ -27,6 +27,12 @@ class DetailBook extends Component {
         function deleteBook() {
             let dataIndex = dataBooks.indexOf(data)
             dataBooks.splice(dataIndex, 1)
+
+            Swal.fire({
+                type: 'success',
+                title: 'Berhasil menghapus',
+                text:   `Data ${data.name} berhasil dihapus`
+            })
         }
 
         const cover = {
@@ -166,11 +172,11 @@ class DetailBook extends Component {
                     }}
                 >Delete</div>
 
-                <ModalDelete
+                {/* <ModalDelete
                     show={this.state.modalDeleteShow}
                     onHide={modalClose}
                     data={data}
-                />
+                /> */}
 
                 <div style={coverMini}></div>
                 <div>
